@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Archetype Game</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+    }
+    #question-container {
+      margin: 20px;
+    }
+    button {
+      margin: 10px;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      background-color: #4CAF50;
+      color: #fff;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #3e8e41;
+    }
+  </style>
+</head>
+<body>
+  <h1>Archetype Game</h1>
+  <div id="question-container">
+    <p id="question">The hero with a sad past.</p>
+    <button id="yes-button" onclick="checkAnswer(true)">It's an Archetype</button>
+    <button id="no-button" onclick="checkAnswer(false)">It's not an Archetype</button>
+    <p id="feedback"></p>
+  </div>
+  <script>
+    let currentQuestion = 0;
+    let questions = [
+      {
+        text: "The hero with a sad past.",
+        isArchetype: true
+      },
+      {
+        text: "Someone with a Toyota car.?",
+        isArchetype: false
+      },
+      {
+        text: "The person who doesn't care what happens, they well accomplish",
+        isArchetype: true
+      }
+    ];
+
+    function checkAnswer(userAnswer) {
+      let correctAnswer = questions[currentQuestion].isArchetype;
+      let feedback = document.getElementById("feedback");
+      if (userAnswer === correctAnswer) {
+        feedback.innerText = "Correct!";
+        currentQuestion++;
+        if (currentQuestion < questions.length) {
+          document.getElementById("question").innerText = questions[currentQuestion].text;
+        } else {
+          alert("Congratulations! You won!");
+        }
+      } else {
+        feedback.innerText = "Incorrect. Try again.";
+        currentQuestion = 0;
+        document.getElementById("question").innerText = questions[currentQuestion].text;
+      }
+      feedback.style.color = correctAnswer ? "green" : "red";
+    }
+  </script>
+</body>
+</html>
